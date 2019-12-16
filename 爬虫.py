@@ -10,28 +10,26 @@ def getHtml(url):
      print("产生异常") 
 
 def parsePage(List,html):
-    try:
-        ult = re.findall(r'\"url\"\:\".*\"',html)
+        ult = re.findall(r'\"url\"\:\".*?\"',html)
         tlt = re.findall(r'\"name\"\:\".*?\"',html)
-        for i in range(len(tlt)):
-            URL = eval(ult[i].split(':')[1])
-            title = eval(tlt[i].split(':')[1])
-            List.append([title,URL])
-    except:
-        print("解析失败")
-
+        for i in range(len(ult)):
+            ur=eval(ult[i].split(':')[1])
+            title=eval(tlt[i].split(':')[1])
+            List.append([title,ur])
 def printList(List):
-    tplt = "{:20}\t{:50}"
-    print(tplt.format("名称","详情地址"))
+   try:
+    tplt = "{:20}\t{:100}"
+    print(tplt.format("名称","详情网址"))
     for j in List:
         print(tplt.format(j[0],j[1]))
+   except:
     print("打印失败")
 def main():
-    goods= '蓝牙耳机'
-    url = 'https://ai.taobao.com/search/index.htm?key='+goods
+    url ='https://ai.taobao.com/search/index.htm?key=%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BA'
     List= []
     html= getHtml(url)
     parsePage(List,html)
     printList(List)
 main()
+        
         
